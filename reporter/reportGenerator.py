@@ -59,19 +59,6 @@ class DynamicReport:
                 Paragraph(text, self.styles["BodyText"]),
                 Spacer(1, 10)]
 
-    # def _add_table(self, title, data, col_names, col_widths):
-    #     story = [Paragraph(title, self.styles["Heading2"]), Spacer(1, 6)]
-    #     table_data = [col_names] + data
-    #     table = Table(table_data, colWidths=col_widths, hAlign='LEFT')
-    #     table.setStyle(TableStyle([
-    #         ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
-    #         ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
-    #         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold')
-    #     ]))
-    #     story.append(table)
-    #     story.append(Spacer(1, 10))
-    #     return story
-
     def _add_table(self, title, data, col_names, col_widths):
         story = [Paragraph(title, self.styles["Heading2"]), Spacer(1, 6)]
 
