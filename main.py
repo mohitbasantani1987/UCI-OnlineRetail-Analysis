@@ -2,7 +2,6 @@ import os
 from time import time
 from baseAnalysis import BaseAnalysis 
 import pandas as pd
-import streamlit as st
 from processor.dataProcessor import DataProcessor
 from reporter.reportGenerator import DynamicReport
 
@@ -31,51 +30,52 @@ class Analysis(BaseAnalysis):
 
     def _load_app(self):
         data_processor = DataProcessor(self.df)
-        st.title("UCI Online Retail Analysis")
-        option = st.selectbox("What kind of analysis would you like to perform?",("Level-1", "Level-2", "Level-3"),
-        index=None,
-        placeholder="Select Analysis Level...",
-        on_change = None,
-        )
+        do = True
 
-        button=st.button("Fetch Detailed Analysis",type="primary",icon="🔍",use_container_width=True)
-        if button:
-            with st.spinner("Please hold on while I generate complete analysis..."):
-                try:
-                    if option == "Level-1":
-                        report_data = data_processor.handle_level_1() 
-                        report = DynamicReport(level="Level-1", author="Mohit Basantani", data_source="UCI ML Repo")
-                        report.generate("static/Level1_report.pdf", report_data)
-                        st.subheader("Your Complete Analysis For: "+ option)
-                        with open("static/Level1_report.pdf", "rb") as file:
-                            st.download_button(label="📄 Download PDF",data=file,file_name="Level1_report.pdf",mime="application/pdf")
-                        st.success("Report generated successfully!")
-                    elif option == "Level-2":
-                        report_data = data_processor.handle_level_1()
-                        report_data_1 = data_processor.handle_level_2()
-                        report_data.update(report_data_1)
-                        report = DynamicReport(level="Level-2", author="Mohit Basantani", data_source="UCI ML Repo")
-                        report.generate("static/Level2_report.pdf", report_data)
-                        st.subheader("Your Complete Analysis For: "+ option)
-                        with open("static/Level2_report.pdf", "rb") as file:
-                            st.download_button(label="📄 Download PDF",data=file,file_name="Level2_report.pdf",mime="application/pdf")
-                        st.success("Report generated successfully!")
-                    elif option == "Level-3":
-                        report_data = data_processor.handle_level_3()
-                        report_data_1 = data_processor.handle_level_1()
-                        report_data_2 = data_processor.handle_level_2()
-                        report_data.update(report_data_1)
-                        report_data.update(report_data_2)
-                        report = DynamicReport(level="Level-3", author="Mohit Basantani", data_source="UCI ML Repo")
-                        report.generate("static/Level3_report.pdf", report_data)
-                        st.subheader("Your Complete Analysis For: "+ option)
-                        with open("static/Level3_report.pdf", "rb") as file:
-                            st.download_button(label="📄 Download PDF",data=file,file_name="Level3_report.pdf",mime="application/pdf")
-                        st.success("Report generated successfully!")
-                    else:
-                        print("Invalid option selected.")
-                except Exception as e:
-                    print(f"Error during analysis: {e}")
+        print("*" * 50, "Welcome to UCI Online Retail Analysis", "*" * 60)
+        print("*" * 150)
+
+        print("\n What kind of analysis would you like to perform?:")
+        print("1. Level 1 analysis")
+        print("2. Level 2 analysis")
+        print("3. Level 3 analysis")
+        print("Use 4, to quit")
+
+        print("*" * 150)
+        while do:
+            option = input("Enter your choice- 1,2,3 or 4 : ").strip().lower()
+            try:
+                if option == "1":
+                    report_data = data_processor.handle_level_1() 
+                    report = DynamicReport(level="Level-1", author="Mohit Basantani", data_source="UCI ML Repo")
+                    report.generate("static/Level1_report.pdf", report_data)
+                    print("\U0001F4D6 Report generated Successfully for Level-1 analysis")
+                    print("*" * 150)
+                elif option == "2":
+                    report_data = data_processor.handle_level_1()
+                    report_data_1 = data_processor.handle_level_2()
+                    report_data.update(report_data_1)
+                    report = DynamicReport(level="Level-2", author="Mohit Basantani", data_source="UCI ML Repo")
+                    report.generate("static/Level2_report.pdf", report_data)
+                    print("\U0001F4D6 Report generated Successfully for Level-2 analysis")
+                    print("*" * 150)
+                elif option == "3":
+                    report_data = data_processor.handle_level_3()
+                    report_data_1 = data_processor.handle_level_1()
+                    report_data_2 = data_processor.handle_level_2()
+                    report_data.update(report_data_1)
+                    report_data.update(report_data_2)
+                    report = DynamicReport(level="Level-3", author="Mohit Basantani", data_source="UCI ML Repo")
+                    report.generate("static/Level3_report.pdf", report_data)
+                    print("\U0001F4D6 Report generated Successfully for Level-3 analysis")
+                    print("*" * 150)
+                elif option == "4":
+                    print("Exiting the analysis. Goodbye!")
+                    do = False    
+                else:
+                    print("Invalid option selected.")
+            except Exception as e:
+                print(f"Error during analysis: {e}")
 
     def run_analysis(self):
         print("Welcome to Report Generator", end="\n")

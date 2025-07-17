@@ -10,7 +10,7 @@ This project analyzes the [UCI Online Retail II dataset](https://archive.ics.uci
   - **Level-2:** Adds feature engineering and generates key visualizations (top countries, monthly revenue, top products).
   - **Level-3:** Advanced analysis with additional plots (correlation matrix, boxplots, KDE curves, etc.).
 - **Automated PDF Reporting:** Generates downloadable PDF reports with tables, facts, and embedded plots.
-- **Streamlit Web App:** Interactive UI to select analysis level and download reports.
+- **Console Web App:** Select analysis level and check reports.
 
 ## Project Structure
 
@@ -39,16 +39,16 @@ This project analyzes the [UCI Online Retail II dataset](https://archive.ics.uci
     pip install -r requirements.txt
     ```
 
-2. Run the Streamlit app:
+2. Run the app:
     ```sh
-    streamlit run main.py
+    python run main.py
     ```
 
 3. Select the desired analysis level and download the generated PDF report.
 
 ## File Descriptions
 
-- **main.py:** Entry point; loads data, runs Streamlit app, and manages report generation.
+- **main.py:** Entry point; loads data, runs python app, and manages report generation.
 - **baseAnalysis.py:** Abstract base class for analysis.
 - **processor/dataProcessor.py:** Data cleaning, feature engineering, and plot generation.
 - **reporter/reportGenerator.py:** PDF report creation with tables and images.
