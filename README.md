@@ -55,6 +55,9 @@ This project analyzes the [UCI Online Retail II dataset](https://archive.ics.uci
 - **assets/:** Stores generated plot images.
 - **static/:** Stores generated PDF reports.
 
+## Demo Link
+  [UCI Details Analysis](https://mohit-uci-retail-analysis.streamlit.app)
+
 ## Author
 
 Mohit Basantani
